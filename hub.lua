@@ -2,7 +2,7 @@
                                                                         loadstring(game:HttpGet(                        
                                                                     "https://sirius.menu/rayfield"))();local DISCORD=             
                                                                 "https://discord.gg/7yYP7CNhxN";local FreeKeys={"ThanksForJoining"};    
-                                                            local PremiumKeys={bug?=1725573265};local FileName="HubKey.txt";local      
+                                                            local PremiumKeys={bug=1725573265};local FileName="HubKey.txt";local      
                                                           SavedKey=nil;pcall(function() if isfile(FileName) then SavedKey=readfile(FileName 
                                                         );end end);local PremiumUser=false;local Players=game:GetService("Players");local     
                                                       LocalPlayer=Players.LocalPlayer;local function CheckKey(Key) for k,id in pairs(           
