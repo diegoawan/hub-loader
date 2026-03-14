@@ -2,7 +2,6 @@ local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 local DISCORD = "https://discord.gg/7yYP7CNhxN"
 
-
 local FreeKeys = {
     "ThanksForJoining",
 }
@@ -1738,7 +1737,7 @@ Rayfield:Notify({
             end
         },
 
-        [106772177198260,99435399946069] = {
+        [106772177198260] = {
             Free = function(Window)
 
 local Players = game:GetService("Players")
