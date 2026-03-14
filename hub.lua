@@ -8,7 +8,6 @@ local FreeKeys = {
 
 local PremiumKeys = {
     ["PREMIUM1"] = 10380725805
-	["E"] = 122123212
 }
 
 local FileName = "HubKey.txt"
