@@ -1738,9 +1738,9 @@ Rayfield:Notify({
             end
         },
 
-        [106772177198260] = {
+        [106772177198260 , 99435399946069] = {
             Free = function(Window)
-				
+
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
 
@@ -1751,14 +1751,13 @@ local Root = Character:WaitForChild("HumanoidRootPart")
 local RemoteHandler = RS:WaitForChild("RemoteHandler")
 local Fishing = RemoteHandler:WaitForChild("Fishing")
 local Upgrade = RemoteHandler:WaitForChild("Upgrade")
-local Collect = RemoteHandler:WaitForChild("Collect")
 local FishingRod = RemoteHandler:WaitForChild("FishingRod")
 local RodMutation = RemoteHandler:WaitForChild("RodMutation")
-local SpinWheel = RemoteHandler:WaitForChild("SpinWheelRequestSpin")
+local Merchant = RemoteHandler:WaitForChild("StPatricksMerchantBuy")
 
 local Main = Window:CreateTab("Main",4483362458)
 local Upgrades = Window:CreateTab("Upgrades",4483362458)
-local Spin = Window:CreateTab("Spin",4483362458)
+local Event = Window:CreateTab("Event",4483362458)
 
 local AutoFishing=false
 local AutoMoney=false
@@ -1767,7 +1766,12 @@ local AutoFishPower=false
 local AutoFishCatch=false
 local AutoFishingRod=false
 local AutoFishEffect=false
-local AutoSpinAlien=false
+local AutoMoneyPot=false
+local AutoLuckPot=false
+local AutoBobber=false
+local AutoBrainrot=false
+local AutoLuckyBlock=false
+local AutoEventRod=false
 
 Main:CreateToggle({
 Name="Auto Fishing",
@@ -1896,16 +1900,101 @@ end
 end
 })
 
-Spin:CreateToggle({
-Name="Auto Spin Alien",
+Event:CreateToggle({
+Name="Auto Money Pots",
 CurrentValue=false,
 Callback=function(v)
-AutoSpinAlien=v
+AutoMoneyPot=v
 if v then
 task.spawn(function()
-while AutoSpinAlien do
-SpinWheel:InvokeServer("Alien")
-task.wait(2.5)
+while AutoMoneyPot do
+Merchant:InvokeServer("MoneyPotion1")
+Merchant:InvokeServer("MoneyPotion2")
+Merchant:InvokeServer("MoneyPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Luck Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckPot=v
+if v then
+task.spawn(function()
+while AutoLuckPot do
+Merchant:InvokeServer("LuckPotion1")
+Merchant:InvokeServer("LuckPotion2")
+Merchant:InvokeServer("LuckPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Bobber",
+CurrentValue=false,
+Callback=function(v)
+AutoBobber=v
+if v then
+task.spawn(function()
+while AutoBobber do
+Merchant:InvokeServer("HeavyBobber")
+Merchant:InvokeServer("LightBobber")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Brainrot",
+CurrentValue=false,
+Callback=function(v)
+AutoBrainrot=v
+if v then
+task.spawn(function()
+while AutoBrainrot do
+Merchant:InvokeServer("BrainrotOffer")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy LuckyBlock",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckyBlock=v
+if v then
+task.spawn(function()
+while AutoLuckyBlock do
+Merchant:InvokeServer("StPatricksLuckyBlock")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Event Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoEventRod=v
+if v then
+task.spawn(function()
+while AutoEventRod do
+Merchant:InvokeServer("LeprechaunsRod")
+task.wait(1)
 end
 end)
 end
@@ -1924,14 +2013,13 @@ local Root = Character:WaitForChild("HumanoidRootPart")
 local RemoteHandler = RS:WaitForChild("RemoteHandler")
 local Fishing = RemoteHandler:WaitForChild("Fishing")
 local Upgrade = RemoteHandler:WaitForChild("Upgrade")
-local Collect = RemoteHandler:WaitForChild("Collect")
 local FishingRod = RemoteHandler:WaitForChild("FishingRod")
 local RodMutation = RemoteHandler:WaitForChild("RodMutation")
-local SpinWheel = RemoteHandler:WaitForChild("SpinWheelRequestSpin")
+local Merchant = RemoteHandler:WaitForChild("StPatricksMerchantBuy")
 
 local Main = Window:CreateTab("Main",4483362458)
 local Upgrades = Window:CreateTab("Upgrades",4483362458)
-local Spin = Window:CreateTab("Spin",4483362458)
+local Event = Window:CreateTab("Event",4483362458)
 
 local AutoFishing=false
 local AutoMoney=false
@@ -1940,7 +2028,12 @@ local AutoFishPower=false
 local AutoFishCatch=false
 local AutoFishingRod=false
 local AutoFishEffect=false
-local AutoSpinAlien=false
+local AutoMoneyPot=false
+local AutoLuckPot=false
+local AutoBobber=false
+local AutoBrainrot=false
+local AutoLuckyBlock=false
+local AutoEventRod=false
 
 Main:CreateToggle({
 Name="Auto Fishing",
@@ -2069,16 +2162,101 @@ end
 end
 })
 
-Spin:CreateToggle({
-Name="Auto Spin Alien",
+Event:CreateToggle({
+Name="Auto Money Pots",
 CurrentValue=false,
 Callback=function(v)
-AutoSpinAlien=v
+AutoMoneyPot=v
 if v then
 task.spawn(function()
-while AutoSpinAlien do
-SpinWheel:InvokeServer("Alien")
-task.wait(2.5)
+while AutoMoneyPot do
+Merchant:InvokeServer("MoneyPotion1")
+Merchant:InvokeServer("MoneyPotion2")
+Merchant:InvokeServer("MoneyPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Luck Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckPot=v
+if v then
+task.spawn(function()
+while AutoLuckPot do
+Merchant:InvokeServer("LuckPotion1")
+Merchant:InvokeServer("LuckPotion2")
+Merchant:InvokeServer("LuckPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Bobber",
+CurrentValue=false,
+Callback=function(v)
+AutoBobber=v
+if v then
+task.spawn(function()
+while AutoBobber do
+Merchant:InvokeServer("HeavyBobber")
+Merchant:InvokeServer("LightBobber")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Brainrot",
+CurrentValue=false,
+Callback=function(v)
+AutoBrainrot=v
+if v then
+task.spawn(function()
+while AutoBrainrot do
+Merchant:InvokeServer("BrainrotOffer")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy LuckyBlock",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckyBlock=v
+if v then
+task.spawn(function()
+while AutoLuckyBlock do
+Merchant:InvokeServer("StPatricksLuckyBlock")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Event Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoEventRod=v
+if v then
+task.spawn(function()
+while AutoEventRod do
+Merchant:InvokeServer("LeprechaunsRod")
+task.wait(1)
 end
 end)
 end
