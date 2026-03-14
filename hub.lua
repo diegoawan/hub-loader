@@ -1738,7 +1738,7 @@ Rayfield:Notify({
             end
         },
 
-        [106772177198260 , 99435399946069] = {
+        [106772177198260,99435399946069] = {
             Free = function(Window)
 
 local Players = game:GetService("Players")
