@@ -8,7 +8,7 @@ local FreeKeys = {
 
 local PremiumKeys = {
     ["PREMIUM1"] = 10380725805
-
+	["E"] = 122123212
 }
 
 local FileName = "HubKey.txt"
@@ -2264,12 +2264,530 @@ end
             end
         },
 
-        [1111115] = {
+        [99435399946069] = {
             Free = function(Window)
 
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Root = Character:WaitForChild("HumanoidRootPart")
+
+local RemoteHandler = RS:WaitForChild("RemoteHandler")
+local Fishing = RemoteHandler:WaitForChild("Fishing")
+local Upgrade = RemoteHandler:WaitForChild("Upgrade")
+local FishingRod = RemoteHandler:WaitForChild("FishingRod")
+local RodMutation = RemoteHandler:WaitForChild("RodMutation")
+local Merchant = RemoteHandler:WaitForChild("StPatricksMerchantBuy")
+
+local Main = Window:CreateTab("Main",4483362458)
+local Upgrades = Window:CreateTab("Upgrades",4483362458)
+local Event = Window:CreateTab("Event",4483362458)
+
+local AutoFishing=false
+local AutoMoney=false
+local AutoBase=false
+local AutoFishPower=false
+local AutoFishCatch=false
+local AutoFishingRod=false
+local AutoFishEffect=false
+local AutoMoneyPot=false
+local AutoLuckPot=false
+local AutoBobber=false
+local AutoBrainrot=false
+local AutoLuckyBlock=false
+local AutoEventRod=false
+
+Main:CreateToggle({
+Name="Auto Fishing",
+CurrentValue=false,
+Callback=function(v)
+AutoFishing=v
+if v then
+task.spawn(function()
+while AutoFishing do
+Fishing:FireServer("Caught",math.huge)
+task.wait(0.15)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Money",
+CurrentValue=false,
+Callback=function(v)
+AutoMoney=v
+if v then
+task.spawn(function()
+while AutoMoney do
+for _,base in pairs(workspace.Bases:GetChildren()) do
+if base:FindFirstChild("Objects") then
+for _,plot in pairs(base.Objects:GetChildren()) do
+local part=plot:FindFirstChild("CollectPart")
+if part then
+firetouchinterest(Root,part,0)
+firetouchinterest(Root,part,1)
+task.wait(0.03)
+end
+end
+end
+end
+task.wait(0.2)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Base Level",
+CurrentValue=false,
+Callback=function(v)
+AutoBase=v
+if v then
+task.spawn(function()
+while AutoBase do
+Upgrade:FireServer("BaseLevel")
+task.wait(0.6)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Power",
+CurrentValue=false,
+Callback=function(v)
+AutoFishPower=v
+if v then
+task.spawn(function()
+while AutoFishPower do
+Upgrade:FireServer("power10")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Catch",
+CurrentValue=false,
+Callback=function(v)
+AutoFishCatch=v
+if v then
+task.spawn(function()
+while AutoFishCatch do
+Upgrade:FireServer("carry1")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fishing Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoFishingRod=v
+if v then
+task.spawn(function()
+for i=1,18 do
+if not AutoFishingRod then break end
+FishingRod:FireServer("Buy","FishingRod"..i)
+task.wait(0.6)
+end
+AutoFishingRod=false
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Effect",
+CurrentValue=false,
+Callback=function(v)
+AutoFishEffect=v
+if v then
+task.spawn(function()
+for i=1,7 do
+if not AutoFishEffect then break end
+RodMutation:FireServer("Buy","RodMutation"..i)
+task.wait(0.6)
+end
+AutoFishEffect=false
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Money Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoMoneyPot=v
+if v then
+task.spawn(function()
+while AutoMoneyPot do
+Merchant:InvokeServer("MoneyPotion1")
+Merchant:InvokeServer("MoneyPotion2")
+Merchant:InvokeServer("MoneyPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Luck Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckPot=v
+if v then
+task.spawn(function()
+while AutoLuckPot do
+Merchant:InvokeServer("LuckPotion1")
+Merchant:InvokeServer("LuckPotion2")
+Merchant:InvokeServer("LuckPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Bobber",
+CurrentValue=false,
+Callback=function(v)
+AutoBobber=v
+if v then
+task.spawn(function()
+while AutoBobber do
+Merchant:InvokeServer("HeavyBobber")
+Merchant:InvokeServer("LightBobber")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Brainrot",
+CurrentValue=false,
+Callback=function(v)
+AutoBrainrot=v
+if v then
+task.spawn(function()
+while AutoBrainrot do
+Merchant:InvokeServer("BrainrotOffer")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy LuckyBlock",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckyBlock=v
+if v then
+task.spawn(function()
+while AutoLuckyBlock do
+Merchant:InvokeServer("StPatricksLuckyBlock")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Event Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoEventRod=v
+if v then
+task.spawn(function()
+while AutoEventRod do
+Merchant:InvokeServer("LeprechaunsRod")
+task.wait(1)
+end
+end)
+end
+end
+})
             end,
             Premium = function(Window)
 
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Root = Character:WaitForChild("HumanoidRootPart")
+
+local RemoteHandler = RS:WaitForChild("RemoteHandler")
+local Fishing = RemoteHandler:WaitForChild("Fishing")
+local Upgrade = RemoteHandler:WaitForChild("Upgrade")
+local FishingRod = RemoteHandler:WaitForChild("FishingRod")
+local RodMutation = RemoteHandler:WaitForChild("RodMutation")
+local Merchant = RemoteHandler:WaitForChild("StPatricksMerchantBuy")
+
+local Main = Window:CreateTab("Main",4483362458)
+local Upgrades = Window:CreateTab("Upgrades",4483362458)
+local Event = Window:CreateTab("Event",4483362458)
+
+local AutoFishing=false
+local AutoMoney=false
+local AutoBase=false
+local AutoFishPower=false
+local AutoFishCatch=false
+local AutoFishingRod=false
+local AutoFishEffect=false
+local AutoMoneyPot=false
+local AutoLuckPot=false
+local AutoBobber=false
+local AutoBrainrot=false
+local AutoLuckyBlock=false
+local AutoEventRod=false
+
+Main:CreateToggle({
+Name="Auto Fishing",
+CurrentValue=false,
+Callback=function(v)
+AutoFishing=v
+if v then
+task.spawn(function()
+while AutoFishing do
+Fishing:FireServer("Caught",math.huge)
+task.wait(0.15)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Money",
+CurrentValue=false,
+Callback=function(v)
+AutoMoney=v
+if v then
+task.spawn(function()
+while AutoMoney do
+for _,base in pairs(workspace.Bases:GetChildren()) do
+if base:FindFirstChild("Objects") then
+for _,plot in pairs(base.Objects:GetChildren()) do
+local part=plot:FindFirstChild("CollectPart")
+if part then
+firetouchinterest(Root,part,0)
+firetouchinterest(Root,part,1)
+task.wait(0.03)
+end
+end
+end
+end
+task.wait(0.2)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Base Level",
+CurrentValue=false,
+Callback=function(v)
+AutoBase=v
+if v then
+task.spawn(function()
+while AutoBase do
+Upgrade:FireServer("BaseLevel")
+task.wait(0.6)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Power",
+CurrentValue=false,
+Callback=function(v)
+AutoFishPower=v
+if v then
+task.spawn(function()
+while AutoFishPower do
+Upgrade:FireServer("power10")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Catch",
+CurrentValue=false,
+Callback=function(v)
+AutoFishCatch=v
+if v then
+task.spawn(function()
+while AutoFishCatch do
+Upgrade:FireServer("carry1")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fishing Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoFishingRod=v
+if v then
+task.spawn(function()
+for i=1,18 do
+if not AutoFishingRod then break end
+FishingRod:FireServer("Buy","FishingRod"..i)
+task.wait(0.6)
+end
+AutoFishingRod=false
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Effect",
+CurrentValue=false,
+Callback=function(v)
+AutoFishEffect=v
+if v then
+task.spawn(function()
+for i=1,7 do
+if not AutoFishEffect then break end
+RodMutation:FireServer("Buy","RodMutation"..i)
+task.wait(0.6)
+end
+AutoFishEffect=false
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Money Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoMoneyPot=v
+if v then
+task.spawn(function()
+while AutoMoneyPot do
+Merchant:InvokeServer("MoneyPotion1")
+Merchant:InvokeServer("MoneyPotion2")
+Merchant:InvokeServer("MoneyPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Luck Pots",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckPot=v
+if v then
+task.spawn(function()
+while AutoLuckPot do
+Merchant:InvokeServer("LuckPotion1")
+Merchant:InvokeServer("LuckPotion2")
+Merchant:InvokeServer("LuckPotion3")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Bobber",
+CurrentValue=false,
+Callback=function(v)
+AutoBobber=v
+if v then
+task.spawn(function()
+while AutoBobber do
+Merchant:InvokeServer("HeavyBobber")
+Merchant:InvokeServer("LightBobber")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Brainrot",
+CurrentValue=false,
+Callback=function(v)
+AutoBrainrot=v
+if v then
+task.spawn(function()
+while AutoBrainrot do
+Merchant:InvokeServer("BrainrotOffer")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy LuckyBlock",
+CurrentValue=false,
+Callback=function(v)
+AutoLuckyBlock=v
+if v then
+task.spawn(function()
+while AutoLuckyBlock do
+Merchant:InvokeServer("StPatricksLuckyBlock")
+task.wait(1)
+end
+end)
+end
+end
+})
+
+Event:CreateToggle({
+Name="Auto Buy Event Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoEventRod=v
+if v then
+task.spawn(function()
+while AutoEventRod do
+Merchant:InvokeServer("LeprechaunsRod")
+task.wait(1)
+end
+end)
+end
+end
+})
             end
         },
 
