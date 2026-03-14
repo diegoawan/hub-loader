@@ -8,7 +8,7 @@ local FreeKeys = {
 }
 
 local PremiumKeys = {
-    ["PREMIUM1"] = 162617271
+    ["PREMIUM1"] = 10380725805
 
 }
 
