@@ -1738,12 +1738,352 @@ Rayfield:Notify({
             end
         },
 
-        [1111114] = {
+        [106772177198260] = {
             Free = function(Window)
+				
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
 
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Root = Character:WaitForChild("HumanoidRootPart")
+
+local RemoteHandler = RS:WaitForChild("RemoteHandler")
+local Fishing = RemoteHandler:WaitForChild("Fishing")
+local Upgrade = RemoteHandler:WaitForChild("Upgrade")
+local Collect = RemoteHandler:WaitForChild("Collect")
+local FishingRod = RemoteHandler:WaitForChild("FishingRod")
+local RodMutation = RemoteHandler:WaitForChild("RodMutation")
+local SpinWheel = RemoteHandler:WaitForChild("SpinWheelRequestSpin")
+
+local Main = Window:CreateTab("Main",4483362458)
+local Upgrades = Window:CreateTab("Upgrades",4483362458)
+local Spin = Window:CreateTab("Spin",4483362458)
+
+local AutoFishing=false
+local AutoMoney=false
+local AutoBase=false
+local AutoFishPower=false
+local AutoFishCatch=false
+local AutoFishingRod=false
+local AutoFishEffect=false
+local AutoSpinAlien=false
+
+Main:CreateToggle({
+Name="Auto Fishing",
+CurrentValue=false,
+Callback=function(v)
+AutoFishing=v
+if v then
+task.spawn(function()
+while AutoFishing do
+Fishing:FireServer("Caught",math.huge)
+task.wait(0.15)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Money",
+CurrentValue=false,
+Callback=function(v)
+AutoMoney=v
+if v then
+task.spawn(function()
+while AutoMoney do
+for _,base in pairs(workspace.Bases:GetChildren()) do
+if base:FindFirstChild("Objects") then
+for _,plot in pairs(base.Objects:GetChildren()) do
+local part=plot:FindFirstChild("CollectPart")
+if part then
+firetouchinterest(Root,part,0)
+firetouchinterest(Root,part,1)
+task.wait(0.03)
+end
+end
+end
+end
+task.wait(0.2)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Base Level",
+CurrentValue=false,
+Callback=function(v)
+AutoBase=v
+if v then
+task.spawn(function()
+while AutoBase do
+Upgrade:FireServer("BaseLevel")
+task.wait(0.6)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Power",
+CurrentValue=false,
+Callback=function(v)
+AutoFishPower=v
+if v then
+task.spawn(function()
+while AutoFishPower do
+Upgrade:FireServer("power10")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Catch",
+CurrentValue=false,
+Callback=function(v)
+AutoFishCatch=v
+if v then
+task.spawn(function()
+while AutoFishCatch do
+Upgrade:FireServer("carry1")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fishing Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoFishingRod=v
+if v then
+task.spawn(function()
+for i=1,18 do
+if not AutoFishingRod then break end
+FishingRod:FireServer("Buy","FishingRod"..i)
+task.wait(0.6)
+end
+AutoFishingRod=false
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Effect",
+CurrentValue=false,
+Callback=function(v)
+AutoFishEffect=v
+if v then
+task.spawn(function()
+for i=1,7 do
+if not AutoFishEffect then break end
+RodMutation:FireServer("Buy","RodMutation"..i)
+task.wait(0.6)
+end
+AutoFishEffect=false
+end)
+end
+end
+})
+
+Spin:CreateToggle({
+Name="Auto Spin Alien",
+CurrentValue=false,
+Callback=function(v)
+AutoSpinAlien=v
+if v then
+task.spawn(function()
+while AutoSpinAlien do
+SpinWheel:InvokeServer("Alien")
+task.wait(2.5)
+end
+end)
+end
+end
+})
             end,
             Premium = function(Window)
 
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local Root = Character:WaitForChild("HumanoidRootPart")
+
+local RemoteHandler = RS:WaitForChild("RemoteHandler")
+local Fishing = RemoteHandler:WaitForChild("Fishing")
+local Upgrade = RemoteHandler:WaitForChild("Upgrade")
+local Collect = RemoteHandler:WaitForChild("Collect")
+local FishingRod = RemoteHandler:WaitForChild("FishingRod")
+local RodMutation = RemoteHandler:WaitForChild("RodMutation")
+local SpinWheel = RemoteHandler:WaitForChild("SpinWheelRequestSpin")
+
+local Main = Window:CreateTab("Main",4483362458)
+local Upgrades = Window:CreateTab("Upgrades",4483362458)
+local Spin = Window:CreateTab("Spin",4483362458)
+
+local AutoFishing=false
+local AutoMoney=false
+local AutoBase=false
+local AutoFishPower=false
+local AutoFishCatch=false
+local AutoFishingRod=false
+local AutoFishEffect=false
+local AutoSpinAlien=false
+
+Main:CreateToggle({
+Name="Auto Fishing",
+CurrentValue=false,
+Callback=function(v)
+AutoFishing=v
+if v then
+task.spawn(function()
+while AutoFishing do
+Fishing:FireServer("Caught",math.huge)
+task.wait(0.15)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Money",
+CurrentValue=false,
+Callback=function(v)
+AutoMoney=v
+if v then
+task.spawn(function()
+while AutoMoney do
+for _,base in pairs(workspace.Bases:GetChildren()) do
+if base:FindFirstChild("Objects") then
+for _,plot in pairs(base.Objects:GetChildren()) do
+local part=plot:FindFirstChild("CollectPart")
+if part then
+firetouchinterest(Root,part,0)
+firetouchinterest(Root,part,1)
+task.wait(0.03)
+end
+end
+end
+end
+task.wait(0.2)
+end
+end)
+end
+end
+})
+
+Main:CreateToggle({
+Name="Auto Base Level",
+CurrentValue=false,
+Callback=function(v)
+AutoBase=v
+if v then
+task.spawn(function()
+while AutoBase do
+Upgrade:FireServer("BaseLevel")
+task.wait(0.6)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Power",
+CurrentValue=false,
+Callback=function(v)
+AutoFishPower=v
+if v then
+task.spawn(function()
+while AutoFishPower do
+Upgrade:FireServer("power10")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Catch",
+CurrentValue=false,
+Callback=function(v)
+AutoFishCatch=v
+if v then
+task.spawn(function()
+while AutoFishCatch do
+Upgrade:FireServer("carry1")
+task.wait(0.7)
+end
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fishing Rod",
+CurrentValue=false,
+Callback=function(v)
+AutoFishingRod=v
+if v then
+task.spawn(function()
+for i=1,18 do
+if not AutoFishingRod then break end
+FishingRod:FireServer("Buy","FishingRod"..i)
+task.wait(0.6)
+end
+AutoFishingRod=false
+end)
+end
+end
+})
+
+Upgrades:CreateToggle({
+Name="Auto Fish Effect",
+CurrentValue=false,
+Callback=function(v)
+AutoFishEffect=v
+if v then
+task.spawn(function()
+for i=1,7 do
+if not AutoFishEffect then break end
+RodMutation:FireServer("Buy","RodMutation"..i)
+task.wait(0.6)
+end
+AutoFishEffect=false
+end)
+end
+end
+})
+
+Spin:CreateToggle({
+Name="Auto Spin Alien",
+CurrentValue=false,
+Callback=function(v)
+AutoSpinAlien=v
+if v then
+task.spawn(function()
+while AutoSpinAlien do
+SpinWheel:InvokeServer("Alien")
+task.wait(2.5)
+end
+end)
+end
+end
+})
             end
         },
 
