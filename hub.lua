@@ -3111,24 +3111,21 @@ end
     -- GAME DETECTION
     --------------------------------------------------
 
-    local Game = Games[game.PlaceId]
+    local GameData = Games[game.PlaceId]
 
-    if Game then
-
-        if PremiumUser then
-            Game.Premium(Window)
-        else
-            Game.Free(Window)
-        end
-
+if GameData then
+    if PremiumUser then
+        GameData.Premium(Window)
     else
-
-        local Tab = Window:CreateTab("Unsupported Game")
-
-        Tab:CreateLabel("Game not supported yet.")
-
+        GameData.Free(Window)
     end
-
+else
+    Rayfield:Notify({
+        Title = "Unsupported Game",
+        Content = "This game is not supported by the hub",
+        Duration = 5
+    })
+	end
 end
 
 if SavedKey and CheckKey(SavedKey) then
