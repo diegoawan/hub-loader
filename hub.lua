@@ -1328,7 +1328,7 @@ UpgradeTab:CreateToggle({
 		if Value then
 			task.spawn(function()
 				while AutoGPULuck do
-					local args = buffer.fromstring("\003\018Graphics Card Luck\003One")}
+					local args = buffer.fromstring("\003\018Graphics Card Luck\003One") }
 					Remote:FireServer(unpack(args))
 					task.wait(1)
 				end
