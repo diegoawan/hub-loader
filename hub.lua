@@ -7,7 +7,10 @@ local FreeKeys = {
 }
 
 local PremiumKeys = {
-    ["PREMIUM1"] = 10380725805
+    ["PREMIUM1"] = 10380725805,
+    ["PREMIUM2"] = 9283746521,
+    ["VIPKEY"] = 1234567890,
+    ["ADMINKEY"] = 8765432109
 }
 
 local FileName = "HubKey.txt"
