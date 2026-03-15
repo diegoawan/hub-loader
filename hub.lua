@@ -1085,7 +1085,8 @@ local AutoPrestige = false
 local AutoComputers = false
 local AutoLuck = false
 local AutoSlots = false
-
+local AutoGPULuck = false
+					
 local function ClickButton(button)
     pcall(function()
         if button and button.Activate then
@@ -1317,7 +1318,26 @@ UpgradeTab:CreateToggle({
         end
     end
 })
-    
+
+UpgradeTab:CreateToggle({
+	Name = "Auto GPU Luck",
+	CurrentValue = false,
+	Callback = function(Value)
+
+		AutoGPULuck = Value
+
+		if Value then
+			task.spawn(function()
+				while AutoGPULuck do
+					local args = { local args = { buffer.fromstring("\003\018Graphics Card Luck\003One")}
+					Remote:FireServer(unpack(args))
+					task.wait(1)
+				end
+			end)
+		end
+	end
+})								
+					
 end},
 [110626257954132] = {
             Free = function(Window)
