@@ -222,7 +222,8 @@ local RuneAssembly = false
 local RunePrestige = false
 local RuneAscension = false
 local RuneGray = false
-
+local RuneSingularity = false
+				
 MainTab:CreateToggle({
 Name = "Auto Cube (Teleport)",
 CurrentValue = false,
@@ -405,6 +406,21 @@ end)
 end
 })
 
+RuneTab:CreateToggle({
+Name = "Auto Singularity Rune",
+CurrentValue = false,
+Callback = function(v)
+RuneColors = v
+if not v then return end
+task.spawn(function()
+while RuneColors do
+BuyRune("Singularity")
+task.wait(0.2)
+end
+end)
+end
+})				
+
 TeleportTab:CreateButton({
 Name = "Teleport to Island",
 Callback = function()
@@ -464,7 +480,8 @@ local RuneAssembly = false
 local RunePrestige = false
 local RuneAscension = false
 local RuneGray = false
-
+local RuneSingularity = false
+				
 MainTab:CreateToggle({
 Name = "Auto Cube (Teleport)",
 CurrentValue = false,
@@ -551,7 +568,7 @@ if not v then return end
 task.spawn(function()
 while RuneBasic do
 BuyRune("Basic")
-task.wait(0.05)
+task.wait(0.005)
 end
 end)
 end
@@ -647,6 +664,21 @@ end)
 end
 })
 
+RuneTab:CreateToggle({
+Name = "Auto Singularity Rune",
+CurrentValue = false,
+Callback = function(v)
+RuneGray = v
+if not v then return end
+task.spawn(function()
+while RuneGray do
+BuyRune("Singularity")
+task.wait(0.05)
+end
+end)
+end
+})
+				
 TeleportTab:CreateButton({
 Name = "Teleport to Island",
 Callback = function()
