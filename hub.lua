@@ -410,10 +410,10 @@ RuneTab:CreateToggle({
 Name = "Auto Singularity Rune",
 CurrentValue = false,
 Callback = function(v)
-RuneColors = v
+RuneSingularity = v
 if not v then return end
 task.spawn(function()
-while RuneColors do
+while RuneSingularity do
 BuyRune("Singularity")
 task.wait(0.2)
 end
@@ -668,10 +668,10 @@ RuneTab:CreateToggle({
 Name = "Auto Singularity Rune",
 CurrentValue = false,
 Callback = function(v)
-RuneGray = v
+RuneSingularity = v
 if not v then return end
 task.spawn(function()
-while RuneGray do
+while RuneSingularity do
 BuyRune("Singularity")
 task.wait(0.001)
 end
@@ -712,7 +712,6 @@ end
 })
             end
         },
-
         [88728410943211] = {
             Free = function(Window)
 
@@ -1057,7 +1056,7 @@ UpgradeTab:CreateToggle({
 		if Value then
 			task.spawn(function()
 				while AutoGPULuck do
-					local args = { local args = { buffer.fromstring("\003\018Graphics Card Luck\003One")}
+					local args = { buffer.fromstring("\003\018Graphics Card Luck\003One")}
 					Remote:FireServer(unpack(args))
 					task.wait(1)
 				end
@@ -1329,7 +1328,7 @@ UpgradeTab:CreateToggle({
 		if Value then
 			task.spawn(function()
 				while AutoGPULuck do
-					local args = { local args = { buffer.fromstring("\003\018Graphics Card Luck\003One")}
+					local args = buffer.fromstring("\003\018Graphics Card Luck\003One")}
 					Remote:FireServer(unpack(args))
 					task.wait(1)
 				end
@@ -1729,7 +1728,6 @@ Rayfield:Notify({
 })
             end
         },
-
         [106772177198260] = {
             Free = function(Window)
 
