@@ -568,7 +568,7 @@ if not v then return end
 task.spawn(function()
 while RuneBasic do
 BuyRune("Basic")
-task.wait()
+task.wait(0.001)
 end
 end)
 end
@@ -598,7 +598,7 @@ if not v then return end
 task.spawn(function()
 while RuneHidden do
 BuyRune("Hidden Rune 1")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
@@ -613,7 +613,7 @@ if not v then return end
 task.spawn(function()
 while RuneAssembly do
 BuyRune("Assembly")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
@@ -628,7 +628,7 @@ if not v then return end
 task.spawn(function()
 while RunePrestige do
 BuyRune("Prestige")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
@@ -643,7 +643,7 @@ if not v then return end
 task.spawn(function()
 while RuneAscension do
 BuyRune("Ascension")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
@@ -658,7 +658,7 @@ if not v then return end
 task.spawn(function()
 while RuneGray do
 BuyRune("Gray")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
@@ -673,7 +673,7 @@ if not v then return end
 task.spawn(function()
 while RuneGray do
 BuyRune("Singularity")
-task.wait(0.05)
+task.wait(0.001)
 end
 end)
 end
