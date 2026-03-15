@@ -568,7 +568,7 @@ if not v then return end
 task.spawn(function()
 while RuneBasic do
 BuyRune("Basic")
-task.wait(0.001)
+task.wait()
 end
 end)
 end
