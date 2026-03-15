@@ -1010,21 +1010,19 @@ UpgradeTab:CreateToggle({
 		end
 	end
 })
-
-       end,
-        Premium = function(Window)
-
+			end,
+Premium = function(Window)
+				
 local RS = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
 local Player = Players.LocalPlayer
 local Remote = RS:WaitForChild("Packages"):WaitForChild("Packet"):WaitForChild("RemoteEvent")
 
-local Tab = Window:CreateTab("Main",4483362458)
-local UpgradeTab = Window:CreateTab("Luck & Slots",4483362458)
+local Tab = Window:CreateTab("Main", 4483362458)
+local UpgradeTab = Window:CreateTab("Luck & Slots", 4483362458)
 
 local AutoCash = false
-local CashSpeed = 0.1
 local AutoUpgrade = false
 local MaxUpgradeLevel = 30
 local AutoGPU = false
@@ -1034,316 +1032,237 @@ local AutoLuck = false
 local AutoSlots = false
 
 local function ClickButton(button)
-	pcall(function()
-		if button and button.Activate then
-			button:Activate()
-		end
-	end)
-
-	pcall(function()
-		if firesignal and button.MouseButton1Click then
-			firesignal(button.MouseButton1Click)
-		end
-	end)
+    pcall(function()
+        if button and button.Activate then
+            button:Activate()
+        end
+    end)
+    pcall(function()
+        if firesignal and button.MouseButton1Click then
+            firesignal(button.MouseButton1Click)
+        end
+    end)
 end
 
-local CollectParts = nil
-
+local CollectParts
 Tab:CreateToggle({
-	Name = "Auto Cash",
-	CurrentValue = false,
-	Callback = function(Value)
-		AutoCash = Value
+    Name = "Auto Cash",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoCash = Value
 
-		if Value then
+        if Value then
+            if not CollectParts then
+                CollectParts = {}
+                for _,v in ipairs(workspace:GetDescendants()) do
+                    if v.Name == "CollectPartTouch" and v:FindFirstChild("TouchInterest") then
+                        table.insert(CollectParts,v)
+                    end
+                end
+            end
 
-			if not CollectParts then
-				CollectParts = {}
-				for _,v in ipairs(workspace:GetDescendants()) do
-					if v.Name == "CollectPartTouch" and v:FindFirstChild("TouchInterest") then
-						table.insert(CollectParts,v)
-					end
-				end
-			end
-
-			task.spawn(function()
-				while AutoCash do
-					local Character = Player.Character
-					local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
-
-					if HRP then
-						for _,v in ipairs(CollectParts) do
-							-- pcall to prevent errors if part disappears
-							pcall(function()
-								firetouchinterest(HRP,v,0)
-								firetouchinterest(HRP,v,1)
-							end)
-						end
-					end
-
-					-- Always read the latest CashSpeed each loop
-					task.wait(math.clamp(CashSpeed, 0.05, 5)) 
-				end
-			end)
-
-		end
-	end
+            task.spawn(function()
+                while AutoCash do
+                    local HRP = Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+                    if HRP then
+                        for _,v in ipairs(CollectParts) do
+                            pcall(function()
+                                firetouchinterest(HRP,v,0)
+                                firetouchinterest(HRP,v,1)
+                            end)
+                        end
+                    end
+                    task.wait(0.05)
+                end
+            end)
+        end
+    end
 })
 
 Tab:CreateSlider({
-	Name = "Auto Cash Speed",
-	Range = {0.05,3},
-	Increment = 0.05,
-	Suffix = "Seconds",
-	CurrentValue = 0.1,
-	Callback = function(Value)
-		CashSpeed = Value
-	end
+    Name = "Upgrade Stop Level",
+    Range = {1,100},
+    Increment = 1,
+    CurrentValue = 30,
+    Callback = function(Value)
+        MaxUpgradeLevel = Value
+    end
 })
 
-Tab:CreateSlider({
-	Name = "Upgrade Stop Level",
-	Range = {1,100},
-	Increment = 1,
-	CurrentValue = 30,
-	Callback = function(Value)
-		MaxUpgradeLevel = Value
-	end
-})
-
-local UpgradeSlots = nil
-
+local UpgradeSlots
 Tab:CreateToggle({
-	Name = "Auto Upgrade Computers",
-	CurrentValue = false,
-	Callback = function(Value)
+    Name = "Auto Upgrade Computers",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoUpgrade = Value
 
-		AutoUpgrade = Value
+        if Value then
+            if not UpgradeSlots then
+                UpgradeSlots = {}
+                for _,plot in ipairs(workspace.Plots:GetDescendants()) do
+                    if plot.Name == "Slots" then
+                        for _,slot in ipairs(plot:GetChildren()) do
+                            table.insert(UpgradeSlots,slot)
+                        end
+                    end
+                end
+            end
 
-		if Value then
-			if not UpgradeSlots then
-				UpgradeSlots = {}
-
-				for _,plot in ipairs(workspace.Plots:GetDescendants()) do
-					if plot.Name == "Slots" then
-						for _,slot in ipairs(plot:GetChildren()) do
-							table.insert(UpgradeSlots,slot)
-						end
-					end
-				end
-			end
-
-			task.spawn(function()
-				while AutoUpgrade do
-					for _,slot in ipairs(UpgradeSlots) do
-						local levelText = slot:FindFirstChild("UpgradePart")
-
-						if levelText then
-							local gui = levelText:FindFirstChild("UpgradeGUI")
-
-							if gui then
-								local current = gui:FindFirstChild("CurrentLevel")
-
-								if current then
-									local levels = current:FindFirstChild("Levels")
-
-									if levels and levels:IsA("TextLabel") then
-										local number = tonumber(levels.Text:match("%d+"))
-
-										if number and number < MaxUpgradeLevel then
-											pcall(function()
-												local args = {
-													buffer.fromstring("\v\003Max"),
-													{slot}
-												}
-
-												Remote:FireServer(unpack(args))
-											end)
-										end
-									end
-								end
-							end
-						end
-					end
-
-					task.wait(1)
-				end
-			end)
-		end
-	end
+            task.spawn(function()
+                while AutoUpgrade do
+                    for _,slot in ipairs(UpgradeSlots) do
+                        local levelText = slot:FindFirstChild("UpgradePart")
+                        if levelText then
+                            local gui = levelText:FindFirstChild("UpgradeGUI")
+                            if gui then
+                                local current = gui:FindFirstChild("CurrentLevel")
+                                if current then
+                                    local levels = current:FindFirstChild("Levels")
+                                    if levels and levels:IsA("TextLabel") then
+                                        local number = tonumber(levels.Text:match("%d+"))
+                                        if number and number < MaxUpgradeLevel then
+                                            pcall(function()
+                                                Remote:FireServer(buffer.fromstring("\v\003Max"), {slot})
+                                            end)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    task.wait(0.5)
+                end
+            end)
+        end
+    end
 })
 
 Tab:CreateToggle({
-	Name = "Auto Prestige",
-	CurrentValue = false,
-	Callback = function(Value)
-		AutoPrestige = Value
+    Name = "Auto Prestige",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoPrestige = Value
 
-		if Value then
-			task.spawn(function()
-				while AutoPrestige do
-					local args = { buffer.fromstring("%") }
-					Remote:FireServer(unpack(args))
-					task.wait(2)
-				end
-			end)
-		end
-	end
+        if Value then
+            task.spawn(function()
+                while AutoPrestige do
+                    Remote:FireServer(buffer.fromstring("%"))
+                    task.wait(1.5)
+                end
+            end)
+        end
+    end
 })
 
 local GPUCards = {
-["Rusty"] = "\019\005Rusty",
-["Plastic"] = "\019\aPlastic",
-["Wood"] = "\019\004Wood",
-["Metal"] = "\019\005Metal",
-["Starry"] = "\019\006Starry",
-["Gold"] = "\019\004Gold",
-["Diamond"] = "\019\aDiamond",
-["Cursed"] = "\019\006Cursed",
-["Toxic"] = "\019\005Toxic",
-["Black Hole"] = "\019\nBlack Hole",
-["Demonic"] = "\019\aDemonic",
-["Angelic"] = "\019\aAngelic",
-["Hacker"] = "\019\006Hacker",
-["Rainbow"] = "\019\aRainbow",
-["Void"] = "\019\004Void"
+    ["Rusty"] = "\019\005Rusty",
+    ["Plastic"] = "\019\aPlastic",
+    ["Wood"] = "\019\004Wood",
+    ["Metal"] = "\019\005Metal",
+    ["Starry"] = "\019\006Starry",
+    ["Gold"] = "\019\004Gold",
+    ["Diamond"] = "\019\aDiamond",
+    ["Cursed"] = "\019\006Cursed",
+    ["Toxic"] = "\019\005Toxic",
+    ["Black Hole"] = "\019\nBlack Hole",
+    ["Demonic"] = "\019\aDemonic",
+    ["Angelic"] = "\019\aAngelic",
+    ["Hacker"] = "\019\006Hacker",
+    ["Rainbow"] = "\019\aRainbow",
+    ["Void"] = "\019\004Void"
 }
 
 Tab:CreateToggle({
-	Name = "Auto Graphics Cards",
-	CurrentValue = false,
-	Callback = function(Value)
-
-		AutoGPU = Value
-
-		if Value then
-			task.spawn(function()
-
-				while AutoGPU do
-
-					local holder = Player:WaitForChild("PlayerGui")
-						:WaitForChild("MainUI")
-						:WaitForChild("Frames")
-						:WaitForChild("GraphicsCards")
-						:WaitForChild("Holder")
-
-					local AnyStock = false
-
-					for name,packet in pairs(GPUCards) do
-
-						local gpu = holder:FindFirstChild(name)
-
-						if gpu then
-
-							local stock = gpu:FindFirstChild("StockLabel")
-
-							if stock and stock:IsA("TextLabel") then
-
-								local number = tonumber(stock.Text:match("%d+"))
-
-								if number and number > 0 then
-
-									AnyStock = true
-
-									pcall(function()
-										Remote:FireServer(buffer.fromstring(packet))
-									end)
-
-									task.wait(0.1)
-
-								end
-
-							end
-
-						end
-
-					end
-
-					-- If no stock, just wait for shop refresh instead of stopping
-					if not AnyStock then
-						task.wait(3)
-					else
-						task.wait(0.2)
-					end
-
-				end
-
-			end)
-		end
-
-	end
+    Name = "Auto Graphics Cards",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoGPU = Value
+        if Value then
+            task.spawn(function()
+                while AutoGPU do
+                    local holder = Player:WaitForChild("PlayerGui"):WaitForChild("MainUI"):WaitForChild("Frames"):WaitForChild("GraphicsCards"):WaitForChild("Holder")
+                    local AnyStock = false
+                    for name,packet in pairs(GPUCards) do
+                        local gpu = holder:FindFirstChild(name)
+                        if gpu then
+                            local stock = gpu:FindFirstChild("StockLabel")
+                            if stock and stock:IsA("TextLabel") then
+                                local number = tonumber(stock.Text:match("%d+"))
+                                if number and number > 0 then
+                                    AnyStock = true
+                                    pcall(function()
+                                        Remote:FireServer(buffer.fromstring(packet))
+                                    end)
+                                    task.wait(0.05)
+                                end
+                            end
+                        end
+                    end
+                    task.wait(AnyStock and 0.1 or 2) 
+                end
+            end)
+        end
+    end
 })
 
 Tab:CreateToggle({
-	Name = "Auto Buy Computers",
-	CurrentValue = false,
-	Callback = function(Value)
-
-		AutoComputers = Value
-
-		if Value then
-			task.spawn(function()
-				while AutoComputers do
-					local holder = Player.PlayerGui.MainUI.Frames.Items.Holder
-
-					for _,computer in ipairs(holder:GetChildren()) do
-						local front = computer:FindFirstChild("Front")
-
-						if front then
-							local button = front:FindFirstChild("BuyButton")
-
-							if button then
-								ClickButton(button)
-								task.wait(0.05)
-							end
-						end
-					end
-
-					task.wait(0.5)
-				end
-			end)
-		end
-	end
+    Name = "Auto Buy Computers",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoComputers = Value
+        if Value then
+            task.spawn(function()
+                while AutoComputers do
+                    local holder = Player.PlayerGui.MainUI.Frames.Items.Holder
+                    for _,computer in ipairs(holder:GetChildren()) do
+                        local front = computer:FindFirstChild("Front")
+                        if front then
+                            local button = front:FindFirstChild("BuyButton")
+                            if button then
+                                ClickButton(button)
+                                task.wait(0.03)
+                            end
+                        end
+                    end
+                    task.wait(0.3)
+                end
+            end)
+        end
+    end
 })
 
 UpgradeTab:CreateToggle({
-	Name = "Auto Case Luck",
-	CurrentValue = false,
-	Callback = function(Value)
-
-		AutoLuck = Value
-
-		if Value then
-			task.spawn(function()
-				while AutoLuck do
-					local args = { buffer.fromstring("\003\tCase Luck\003Max") }
-					Remote:FireServer(unpack(args))
-					task.wait(1)
-				end
-			end)
-		end
-	end
+    Name = "Auto Case Luck",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoLuck = Value
+        if Value then
+            task.spawn(function()
+                while AutoLuck do
+                    Remote:FireServer(buffer.fromstring("\003\tCase Luck\003Max"))
+                    task.wait(0.7) 
+                end
+            end)
+        end
+    end
 })
 
 UpgradeTab:CreateToggle({
-	Name = "Auto Item Slots",
-	CurrentValue = false,
-	Callback = function(Value)
-
-		AutoSlots = Value
-
-		if Value then
-			task.spawn(function()
-				while AutoSlots do
-					local args = { buffer.fromstring("\003\nItem Slots\003Max") }
-					Remote:FireServer(unpack(args))
-					task.wait(1)
-				end
-			end)
-		end
-	end
+    Name = "Auto Item Slots",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoSlots = Value
+        if Value then
+            task.spawn(function()
+                while AutoSlots do
+                    Remote:FireServer(buffer.fromstring("\003\nItem Slots\003Max"))
+                    task.wait(0.7) 
+                end
+            end)
+        end
+    end
 })
-
+    
 end},
 [110626257954132] = {
             Free = function(Window)
