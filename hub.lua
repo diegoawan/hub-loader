@@ -8,8 +8,8 @@ local FreeKeys = {
 
 local PremiumKeys = {
     ["PREMIUM1"] = 10380725805,
-    ["PREMIUM2"] = 9283746521,
-    ["VIPKEY"] = 1234567890,
+    ["PREMIUM2"] = 2439933624,
+    ["GAYKEY"] = 10396958660,
     ["ADMINKEY"] = 8765432109
 }
 
