@@ -8,7 +8,7 @@ local FreeKeys = {
 
 local PremiumKeys = {
     ["PREMIUM1"] = 10380725805,
-    ["PREMIUM2"] = 2439933624,
+    ["PREMIUM2"] = 24399336249,
     ["GAYKEY"] = 10396958660,
     ["KEY"] = 8319393880
 }
@@ -961,7 +961,7 @@ Tab:CreateToggle({
 
 					end
 
-					-- If no stock, just wait for shop refresh instead of stopping
+					
 					if not AnyStock then
 						task.wait(3)
 					else
@@ -985,24 +985,40 @@ Tab:CreateToggle({
 
 		if Value then
 			task.spawn(function()
+
 				while AutoComputers do
-					local holder = Player.PlayerGui.MainUI.Frames.Items.Holder
+					pcall(function()
 
-					for _,computer in ipairs(holder:GetChildren()) do
-						local front = computer:FindFirstChild("Front")
+						local holder = Players.LocalPlayer
+							:WaitForChild("PlayerGui")
+							:WaitForChild("MainUI")
+							:WaitForChild("Frames")
+							:WaitForChild("Items")
+							:WaitForChild("Holder")
 
-						if front then
-							local button = front:FindFirstChild("BuyButton")
+						for _,computer in ipairs(holder:GetChildren()) do
+							local front = computer:FindFirstChild("Front")
 
-							if button then
-								ClickButton(button)
-								task.wait(0.05)
+							if front then
+								local button = front:FindFirstChild("BuyButton")
+
+								if button then
+									if button.Activate then
+										button:Activate()
+									end
+
+									if firesignal and button.MouseButton1Click then
+										firesignal(button.MouseButton1Click)
+									end
+								end
 							end
 						end
-					end
 
-					task.wait(0.5)
+					end)
+
+					task.wait(0.2)
 				end
+
 			end)
 		end
 	end
