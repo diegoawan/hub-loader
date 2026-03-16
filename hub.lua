@@ -987,29 +987,32 @@ Tab:CreateToggle({
 			task.spawn(function()
 				while AutoComputers do
 
-					pcall(function()
+					local holder = Player:FindFirstChild("PlayerGui")
+						and Player.PlayerGui:FindFirstChild("MainUI")
+						and Player.PlayerGui.MainUI:FindFirstChild("Frames")
+						and Player.PlayerGui.MainUI.Frames:FindFirstChild("Items")
+						and Player.PlayerGui.MainUI.Frames.Items:FindFirstChild("Holder")
 
-						local holder = Player
-							:WaitForChild("PlayerGui")
-							:WaitForChild("MainUI")
-							:WaitForChild("Frames")
-							:WaitForChild("Items")
-							:WaitForChild("Holder")
-
+					if holder then
 						for _,computer in ipairs(holder:GetChildren()) do
 							local front = computer:FindFirstChild("Front")
-
 							if front then
 								local button = front:FindFirstChild("BuyButton")
 
-								if button and button:IsA("TextButton") then
-									ClickButton(button)
+								if button then
+									pcall(function()
+										if firesignal then
+											firesignal(button.MouseButton1Click)
+										else
+											button:Activate()
+										end
+									end)
+
 									task.wait(0.05)
 								end
 							end
 						end
-
-					end)
+					end
 
 					task.wait(0.5)
 
