@@ -994,22 +994,20 @@ Tab:CreateToggle({
 						and Player.PlayerGui.MainUI.Frames.Items:FindFirstChild("Holder")
 
 					if holder then
-						for _,computer in ipairs(holder:GetChildren()) do
+						for _, computer in ipairs(holder:GetChildren()) do
 							local front = computer:FindFirstChild("Front")
-							if front then
-								local button = front:FindFirstChild("BuyButton")
+							local button = front and front:FindFirstChild("BuyButton")
 
-								if button then
-									pcall(function()
-										if firesignal then
-											firesignal(button.MouseButton1Click)
-										else
-											button:Activate()
-										end
-									end)
+							if button then
+								pcall(function()
+									if firesignal then
+										firesignal(button.MouseButton1Click)
+									elseif button.Activate then
+										button:Activate()
+									end
+								end)
 
-									task.wait(0.05)
-								end
+								task.wait(0.05)
 							end
 						end
 					end
