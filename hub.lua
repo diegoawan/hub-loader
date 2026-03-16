@@ -1002,7 +1002,7 @@ Tab:CreateToggle({
 							if front then
 								local button = front:FindFirstChild("BuyButton")
 
-								if button then
+								if button and button:IsA("TextButton") then
 									ClickButton(button)
 									task.wait(0.05)
 								end
