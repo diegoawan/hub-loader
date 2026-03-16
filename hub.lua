@@ -987,14 +987,15 @@ Tab:CreateToggle({
 			task.spawn(function()
 				while AutoComputers do
 
-					local holder = Players.LocalPlayer
-						:FindFirstChild("PlayerGui")
-						and Players.LocalPlayer.PlayerGui:FindFirstChild("MainUI")
-						and Players.LocalPlayer.PlayerGui.MainUI:FindFirstChild("Frames")
-						and Players.LocalPlayer.PlayerGui.MainUI.Frames:FindFirstChild("Items")
-						and Players.LocalPlayer.PlayerGui.MainUI.Frames.Items:FindFirstChild("Holder")
+					pcall(function()
 
-					if holder then
+						local holder = Player
+							:WaitForChild("PlayerGui")
+							:WaitForChild("MainUI")
+							:WaitForChild("Frames")
+							:WaitForChild("Items")
+							:WaitForChild("Holder")
+
 						for _,computer in ipairs(holder:GetChildren()) do
 							local front = computer:FindFirstChild("Front")
 
@@ -1002,21 +1003,15 @@ Tab:CreateToggle({
 								local button = front:FindFirstChild("BuyButton")
 
 								if button then
-									pcall(function()
-										button:Activate()
-									end)
-
-									pcall(function()
-										if firesignal and button.MouseButton1Click then
-											firesignal(button.MouseButton1Click)
-										end
-									end)
+									ClickButton(button)
+									task.wait(0.05)
 								end
 							end
 						end
-					end
 
-					task.wait(0.1)
+					end)
+
+					task.wait(0.5)
 
 				end
 			end)
@@ -1024,25 +1019,6 @@ Tab:CreateToggle({
 	end
 })
 				
-UpgradeTab:CreateToggle({
-	Name = "Auto Case Luck",
-	CurrentValue = false,
-	Callback = function(Value)
-
-		AutoLuck = Value
-
-		if Value then
-			task.spawn(function()
-				while AutoLuck do
-					local args = { buffer.fromstring("\003\tCase Luck\003Max") }
-					Remote:FireServer(unpack(args))
-					task.wait(1)
-				end
-			end)
-		end
-	end
-})
-
 UpgradeTab:CreateToggle({
 	Name = "Auto Item Slots",
 	CurrentValue = false,
