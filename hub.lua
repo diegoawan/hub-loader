@@ -3084,7 +3084,562 @@ end)
 end
 end
 })
-end,
+
+local AutoDupe = false
+
+Tab:CreateToggle({
+	Name = "Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		AutoDupe = Value
+
+		if Value then
+			task.spawn(function()
+
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local function getPlayerBase()
+					for _, base in pairs(workspace.Bases:GetChildren()) do
+						local objects = base:FindFirstChild("Objects")
+						if objects then
+							local ownerBoard = objects:FindFirstChild("OwnerBoard")
+							if ownerBoard then
+								local board = ownerBoard:FindFirstChild("Board")
+								if board then
+									local surfaceGui = board:FindFirstChild("SurfaceGui")
+									if surfaceGui then
+										for _, guiObj in pairs(surfaceGui:GetDescendants()) do
+											if guiObj:IsA("TextLabel") and guiObj.Text == LocalPlayer.Name then
+												return objects
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+					return nil
+				end
+
+				local Base = getPlayerBase()
+				if not Base then
+					warn("Base not found for player: "..LocalPlayer.Name)
+					return
+				end
+
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30 (WITH TOGGLE CHECK)
+				for i = 1, 30 do
+					coroutine.wrap(function()
+						while AutoDupe do
+							local p = "Plot"..i
+							local f = Base:FindFirstChild(p)
+							if f and not hasBrainrot(f) then
+								Remote:FireServer("Add", p, ITEM)
+							end
+							task.wait()
+						end
+					end)()
+				end
+
+			end)
+		end
+	end
+})
+-- Toggle 1: Base1
+local Base1Dupe = false
+Tab:CreateToggle({
+	Name = "Base1 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base1Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- gay
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base1.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})
+-- Toggle 2: Base2 anoyying ass dupe
+local Base2Dupe = false
+Tab:CreateToggle({
+	Name = "Base2 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base2Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- 🔥 CHANGE THIS ONE ONLY
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base2.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})
+-- Toggle 1: Base1
+local Base3Dupe = false
+Tab:CreateToggle({
+	Name = "Base3 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base3Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- 🔥 CHANGE THIS ONE ONLY
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base3.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})			
+-- Toggle 1: Base1
+local Base4Dupe = false
+Tab:CreateToggle({
+	Name = "Base4 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base4Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- 🔥 CHANGE THIS ONE ONLY
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base4.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})
+-- Toggle 1: Base1
+local Base5Dupe = false
+Tab:CreateToggle({
+	Name = "Base5 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base5Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- 🔥 CHANGE THIS ONE ONLY
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base5.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})		
+-- Toggle 1: Base1
+local Base6Dupe = false
+Tab:CreateToggle({
+	Name = "Base6 Dupe",
+	CurrentValue = false,
+	Callback = function(Value)
+		Base6Dupe = Value
+		if Value then
+			task.spawn(function()
+
+				-- 🔥 CHANGE THIS ONE ONLY
+				local Players = game:GetService("Players")
+				local LocalPlayer = Players.LocalPlayer
+
+				local function getBrainrot()
+					local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+					if charFolder then
+						for _, v in pairs(charFolder:GetDescendants()) do
+							if string.find(v.Name, "Brainrot") then
+								return v.Name
+							end
+						end
+					end
+					return "Brainrot1:Normal:1:1:0"
+				end
+
+				local ITEM = getBrainrot()
+
+				local Base = workspace.Bases.Base6.Objects
+				local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+				local function hasBrainrot(plotFolder)
+					for _, v in pairs(plotFolder:GetChildren()) do
+						if string.find(v.Name, "Brainrot") then
+							return true
+						end
+					end
+					return false
+				end
+
+				-- Plot1 → Plot30
+				coroutine.wrap(function() while Base1Dupe do local p="Plot1" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot2" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot3" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot4" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot5" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot6" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot7" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot8" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot9" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot10" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot11" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot12" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot13" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot14" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot15" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot16" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot17" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot18" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot19" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot20" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				
+				coroutine.wrap(function() while Base1Dupe do local p="Plot21" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot22" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot23" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot24" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot25" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot26" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot27" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot28" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot29" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+				coroutine.wrap(function() while Base1Dupe do local p="Plot30" local f=Base:FindFirstChild(p) if f and not hasBrainrot(f) then Remote:FireServer("Add",p,ITEM) end wait() end end)()
+
+			end)
+		end
+	end
+})								
+			end,
 Premium = function(Window)
 
 local Players = game:GetService("Players")
