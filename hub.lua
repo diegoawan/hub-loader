@@ -47,6 +47,28 @@ return false
 
 end
 
+local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
+
+local function getBrainrot()
+	local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
+	if charFolder then
+		for _, v in pairs(charFolder:GetDescendants()) do
+			if string.find(v.Name, "Brainrot") then
+				return v.Name
+			end
+		end
+	end
+	return "Brainrot1:Normal:1:1:0"
+end
+
+local function hasBrainrot(plotFolder)
+	for _, v in pairs(plotFolder:GetChildren()) do
+		if string.find(v.Name, "Brainrot") then
+			return true
+		end
+	end
+	return false
+end
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
