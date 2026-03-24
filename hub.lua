@@ -47,28 +47,6 @@ return false
 
 end
 
-local Remote = game:GetService("ReplicatedStorage").RemoteHandler.Plot
-
-local function getBrainrot()
-	local charFolder = workspace:FindFirstChild(LocalPlayer.Name)
-	if charFolder then
-		for _, v in pairs(charFolder:GetDescendants()) do
-			if string.find(v.Name, "Brainrot") then
-				return v.Name
-			end
-		end
-	end
-	return "Brainrot1:Normal:1:1:0"
-end
-
-local function hasBrainrot(plotFolder)
-	for _, v in pairs(plotFolder:GetChildren()) do
-		if string.find(v.Name, "Brainrot") then
-			return true
-		end
-	end
-	return false
-end
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -1792,8 +1770,7 @@ local Merchant = RemoteHandler:WaitForChild("StPatricksMerchantBuy")
 local Main = Window:CreateTab("Main",4483362458)
 local Upgrades = Window:CreateTab("Upgrades",4483362458)
 local Event = Window:CreateTab("Event",4483362458)
-local DupeTab = Window:CreateTab("Dupe", 4483362458)
-				
+
 local AutoFishing=false
 local AutoMoney=false
 local AutoBase=false
@@ -2035,87 +2012,7 @@ end)
 end
 end
 })
-
-local Enabled0 = false
-
-DupeTab:CreateToggle({
-	Name = "Auto Base",
-	CurrentValue = false,
-	Callback = function(Value)
-		Enabled0 = Value
-		if Value then
-			task.spawn(function()
-				local ITEM = getBrainrot()
-				local function getPlayerBase()
-					for _, base in pairs(workspace.Bases:GetChildren()) do
-						local objects = base:FindFirstChild("Objects")
-						if objects then
-							local ownerBoard = objects:FindFirstChild("OwnerBoard")
-							if ownerBoard then
-								local board = ownerBoard:FindFirstChild("Board")
-								if board then
-									local surfaceGui = board:FindFirstChild("SurfaceGui")
-									if surfaceGui then
-										for _, guiObj in pairs(surfaceGui:GetDescendants()) do
-											if guiObj:IsA("TextLabel") and guiObj.Text == game.Players.LocalPlayer.Name then
-												return objects
-											end
-										end
-									end
-								end
-							end
-						end
-					end
-				end
-
-				local Base = getPlayerBase()
-				if not Base then return end
-
-				while Enabled0 do
-					for i = 2,29 do
-						local p = "Plot"..i
-						local f = Base:FindFirstChild(p)
-						if f and not hasBrainrot(f) then
-							Remote:FireServer("Add", p, ITEM)
-						end
-					end
-					task.wait()
-				end
-			end)
-		end
-	end
-})
-
--- BASE 1 → 6
-for b = 1,6 do
-	local Enabled = false
-
-	DupeTab:CreateToggle({
-		Name = "Base "..b,
-		CurrentValue = false,
-		Callback = function(Value)
-			Enabled = Value
-			if Value then
-				task.spawn(function()
-					local Base = workspace.Bases["Base"..b].Objects
-					local ITEM = getBrainrot()
-
-					while Enabled do
-						for i = 2,29 do
-							local p = "Plot"..i
-							local f = Base:FindFirstChild(p)
-							if f and not hasBrainrot(f) then
-								Remote:FireServer("Add", p, ITEM)
-							end
-						end
-						task.wait()
-					end
-				end)
-			end
-		end
-	})
-				end
-			end,
+end,
 Premium = function(Window)
 
 local Players = game:GetService("Players")
