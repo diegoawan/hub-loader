@@ -78,8 +78,6 @@ local function SendWebhook()
 end
 
 local function LoadHub()
-    SendWebhook()
-
     local Window = Rayfield:CreateWindow({
         Name = "Hub | Free"
     })
@@ -99,13 +97,24 @@ local function LoadHub()
 
     if URL then
         local success, err = pcall(function()
-            loadstring(game:HttpGet(URL))()
+            local content = game:HttpGet(URL)
+            assert(content and #content > 10, "Invalid script")
+
+            loadstring(content)()
         end)
 
-        if not success then
+        if success then
+            SendWebhook()
+        else
             MainTab:CreateParagraph({
                 Title = "Script Error",
                 Content = tostring(err)
+            })
+
+            Rayfield:Notify({
+                Title = "Load Failed",
+                Content = tostring(err),
+                Duration = 5
             })
         end
     else
@@ -124,6 +133,8 @@ local function LoadHub()
         })
     end
 end
+
+-- KEY SYSTEM
 
 if SavedKey and CheckKey(SavedKey) then
     LoadHub()
