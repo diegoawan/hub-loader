@@ -62,18 +62,9 @@ local function SendWebhook()
             ["title"] = "Free Hub Executed",
             ["color"] = 5763719,
             ["fields"] = {
-                {
-                    ["name"] = "User",
-                    ["value"] = LocalPlayer.Name.." ("..LocalPlayer.UserId..")"
-                },
-                {
-                    ["name"] = "Game",
-                    ["value"] = GameName
-                },
-                {
-                    ["name"] = "Time",
-                    ["value"] = os.date("%Y-%m-%d %H:%M:%S")
-                }
+                {["name"] = "User",["value"] = LocalPlayer.Name.." ("..LocalPlayer.UserId..")"},
+                {["name"] = "Game",["value"] = GameName},
+                {["name"] = "Time",["value"] = os.date("%Y-%m-%d %H:%M:%S")}
             }
         }}
     }
@@ -94,10 +85,10 @@ local function LoadHub()
     })
 
     getgenv().Window = Window
-	
-    local Tab = Window:CreateTab("Main")
 
-    Tab:CreateButton({
+    local MainTab = Window:CreateTab("Main", 4483362458)
+
+    MainTab:CreateButton({
         Name = "Join Discord",
         Callback = function()
             setclipboard(DISCORD)
@@ -107,12 +98,29 @@ local function LoadHub()
     local URL = Games[game.PlaceId]
 
     if URL then
-        loadstring(game:HttpGet(URL))()
+        local success, err = pcall(function()
+            loadstring(game:HttpGet(URL))()
+        end)
+
+        if not success then
+            MainTab:CreateParagraph({
+                Title = "Script Error",
+                Content = tostring(err)
+            })
+        end
     else
-        Rayfield:Notify({
-            Title = "Unsupported Game",
-            Content = "Game not supported",
-            Duration = 5
+        local UnsupportedTab = Window:CreateTab("Unsupported", 4483362458)
+
+        UnsupportedTab:CreateParagraph({
+            Title = "Game Not Supported",
+            Content = "This game is not supported yet."
+        })
+
+        UnsupportedTab:CreateButton({
+            Name = "Copy Discord",
+            Callback = function()
+                setclipboard(DISCORD)
+            end
         })
     end
 end
@@ -126,7 +134,7 @@ local Window = Rayfield:CreateWindow({
     Name = "Key System"
 })
 
-local Tab = Window:CreateTab("Key")
+local Tab = Window:CreateTab("Key", 4483362458)
 
 local InputKey = ""
 
@@ -154,6 +162,12 @@ Tab:CreateButton({
             Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
             LoadHub()
+        else
+            Rayfield:Notify({
+                Title = "Invalid Key",
+                Content = "Wrong key",
+                Duration = 3
+            })
         end
     end
 })
