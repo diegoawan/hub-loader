@@ -7,8 +7,6 @@ local Keys = {
     "ThanksForJoining",
 }
 
-local WEBHOOK = "6777777"
-
 local Games = {
     [75759384861869] = "https://raw.githubusercontent.com/diegoawan/Cube-Incremental-/refs/heads/main/Lua",
     [88728410943211] = "https://raw.githubusercontent.com/diegoawan/Computer-Incremental-/refs/heads/main/Lua",
@@ -23,8 +21,6 @@ local Games = {
 }
 
 local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
-local MarketplaceService = game:GetService("MarketplaceService")
 local LocalPlayer = Players.LocalPlayer
 
 local SavedKey
@@ -41,40 +37,6 @@ local function CheckKey(Key)
         end
     end
     return false
-end
-
-local function SendWebhook()
-    local GameName = "Unknown"
-    pcall(function()
-        GameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
-    end)
-
-    local requestFunc =
-        (syn and syn.request) or
-        (http and http.request) or
-        http_request or
-        request
-
-    if not requestFunc then return end
-
-    local Data = {
-        ["embeds"] = {{
-            ["title"] = "Free Hub Executed",
-            ["color"] = 5763719,
-            ["fields"] = {
-                {["name"] = "User",["value"] = LocalPlayer.Name.." ("..LocalPlayer.UserId..")"},
-                {["name"] = "Game",["value"] = GameName},
-                {["name"] = "Time",["value"] = os.date("%Y-%m-%d %H:%M:%S")}
-            }
-        }}
-    }
-
-    requestFunc({
-        Url = WEBHOOK,
-        Method = "POST",
-        Headers = {["Content-Type"] = "application/json"},
-        Body = HttpService:JSONEncode(Data)
-    })
 end
 
 local function LoadHub()
@@ -98,14 +60,20 @@ local function LoadHub()
     if URL then
         local success, err = pcall(function()
             local content = game:HttpGet(URL)
-            assert(content and #content > 10, "Invalid script")
 
-            loadstring(content)()
+            if not content or #content < 10 then
+                error("Script is empty or invalid")
+            end
+
+            local func = loadstring(content)
+            if not func then
+                error("Failed to compile script")
+            end
+
+            func()
         end)
 
-        if success then
-            SendWebhook()
-        else
+        if not success then
             MainTab:CreateParagraph({
                 Title = "Script Error",
                 Content = tostring(err)
