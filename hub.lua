@@ -11,7 +11,7 @@ local WEBHOOK = "6777777"
 
 local Games = {
     [75759384861869] = "https://raw.githubusercontent.com/diegoawan/Cube-Incremental-/refs/heads/main/Lua",
-    [1111112] = "https://raw.githubusercontent.com/yourrepo/free/1111112.lua",
+    [88728410943211] = "https://raw.githubusercontent.com/diegoawan/Computer-Incremental-/refs/heads/main/Lua",
     [1111113] = "https://raw.githubusercontent.com/yourrepo/free/1111113.lua",
     [1111114] = "https://raw.githubusercontent.com/yourrepo/free/1111114.lua",
     [1111115] = "https://raw.githubusercontent.com/yourrepo/free/1111115.lua",
