@@ -31,7 +31,8 @@ pcall(function()
 end)
 
 local function CheckKey(Key)
-    for _,v in pairs(Keys) do
+    if not Key or Key == "" then return false end
+    for _, v in pairs(Keys) do
         if Key == v then
             return true
         end
@@ -63,6 +64,10 @@ local function LoadHub()
 
             if not content or #content < 10 then
                 error("Script is empty or invalid")
+            end
+
+            if content:lower():find("<html") then
+                error("Use raw link")
             end
 
             local func = loadstring(content)
@@ -102,8 +107,6 @@ local function LoadHub()
     end
 end
 
--- KEY SYSTEM
-
 if SavedKey and CheckKey(SavedKey) then
     LoadHub()
     return
@@ -119,6 +122,8 @@ local InputKey = ""
 
 Tab:CreateInput({
     Name = "Enter Key",
+    PlaceholderText = "Type key and press Enter",
+    RemoveTextAfterFocusLost = false,
     Callback = function(text)
         InputKey = text
     end
