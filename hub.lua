@@ -70,11 +70,12 @@ local function LoadHub()
                 error("Use raw link")
             end
 
-            local func = loadstring(content)
+            local func, loadErr = loadstring(content)
             if not func then
-                error("Failed to compile script")
+                error(loadErr or "Failed to compile script")
             end
 
+            setfenv(func, getfenv())
             func()
         end)
 
