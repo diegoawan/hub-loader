@@ -15,7 +15,7 @@ local Games = {
     [99435399946069] = "https://raw.githubusercontent.com/diegoawan/Real-a-brainrot-2/refs/heads/main/Lua",
     [78491332555415] = "https://raw.githubusercontent.com/diegoawan/Watchnumbersgoup/refs/heads/main/Lua",
     [99148298557434] = "https://raw.githubusercontent.com/diegoawan/Reborninc/refs/heads/main/Lua",
-    [1111118] = "https://raw.githubusercontent.com/yourrepo/free/1111118.lua",
+    [110290371202376] = "https://raw.githubusercontent.com/diegoawan/Adoptabrainrot/refs/heads/main/Lua",
     [1111119] = "https://raw.githubusercontent.com/yourrepo/free/1111119.lua",
     [1111120] = "https://raw.githubusercontent.com/yourrepo/free/1111120.lua"
 }
@@ -42,7 +42,7 @@ end
 
 local function LoadHub()
     local Window = Rayfield:CreateWindow({
-        Name = "Hub | Free"
+        Name = "Incremental | Hub"
     })
 
     getgenv().Window = Window
