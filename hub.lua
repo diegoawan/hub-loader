@@ -16,7 +16,7 @@ local Games = {
     [78491332555415] = "https://raw.githubusercontent.com/diegoawan/Watchnumbersgoup/refs/heads/main/Lua",
     [99148298557434] = "https://raw.githubusercontent.com/diegoawan/Reborninc/refs/heads/main/Lua",
     [110290371202376] = "https://raw.githubusercontent.com/diegoawan/Adoptabrainrot/refs/heads/main/Lua",
-    [1111119] = "https://raw.githubusercontent.com/yourrepo/free/1111119.lua",
+    [96668710663666] = "https://raw.githubusercontent.com/diegoawan/Powerinc/refs/heads/main/Lua",
     [1111120] = "https://raw.githubusercontent.com/yourrepo/free/1111120.lua"
 }
 
