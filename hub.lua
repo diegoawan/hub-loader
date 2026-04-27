@@ -17,7 +17,8 @@ local Games = {
     [99148298557434] = "https://raw.githubusercontent.com/diegoawan/Reborninc/refs/heads/main/Lua",
     [110290371202376] = "https://raw.githubusercontent.com/diegoawan/Adoptabrainrot/refs/heads/main/Lua",
     [96668710663666] = "https://raw.githubusercontent.com/diegoawan/Powerinc/refs/heads/main/Lua",
-    [1111120] = "https://raw.githubusercontent.com/yourrepo/free/1111120.lua"
+    [135610605159183] = "https://raw.githubusercontent.com/diegoawan/Portal-incremental-/refs/heads/main/Lua",
+    [11111111] = ""
 }
 
 local Players = game:GetService("Players")
