@@ -17,6 +17,7 @@ local Games = {
     [99435399946069] = "https://raw.githubusercontent.com/diegoawan/Real-a-brainrot-2/refs/heads/main/Lua",
     [78491332555415] = "https://raw.githubusercontent.com/diegoawan/Watchnumbersgoup/refs/heads/main/Lua",
     [99148298557434] = "https://raw.githubusercontent.com/diegoawan/Reborninc/refs/heads/main/Lua",
+    [84156601481934] = "https://raw.githubusercontent.com/diegoawan/rr/refs/heads/main/Lua",
     [110290371202376] = "https://raw.githubusercontent.com/diegoawan/Adoptabrainrot/refs/heads/main/Lua",
     [96668710663666] = "https://raw.githubusercontent.com/diegoawan/Powerinc/refs/heads/main/Lua",
     [135610605159183] = "https://raw.githubusercontent.com/diegoawan/Portal-incremental-/refs/heads/main/Lua",
