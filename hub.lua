@@ -23,7 +23,7 @@ local Games = {
     [135610605159183] = "https://raw.githubusercontent.com/diegoawan/Portal-incremental-/refs/heads/main/Lua",
     [130274245431977] = "https://raw.githubusercontent.com/diegoawan/Climb-and-Plunge/refs/heads/main/Lua",
     [75317862071711] = "https://raw.githubusercontent.com/diegoawan/Immortalityinc/refs/heads/main/Lua",
-    [122821966131621] = "https://raw.githubusercontent.com/diegoawan/Slayerinc2/refs/heads/main/Lua"
+    [122821966131621] = "https://raw.githubusercontent.com/diegoawan/Slayerinc2/refs/heads/main/Lua",
 }
 
 local Players = game:GetService("Players")
