@@ -4,7 +4,7 @@ local DISCORD = "https://discord.gg/7yYP7CNhxN"
 local FileName = "HubKey.txt"
 
 local Keys = {
-    "ThanksForJoining",
+    "IncrementalKey1",
 }
 
 local Games = {
